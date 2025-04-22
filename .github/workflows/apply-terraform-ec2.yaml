@@ -9,9 +9,6 @@ on:
       instance_type:
         description: 'EC2 Instance Type'
         required: true
-      ami_id:
-        description: 'AMI ID to use for the instance'
-        required: true
       security_group:
         description: 'Security Group Name for the instance'
         required: true
