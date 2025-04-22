@@ -1,0 +1,60 @@
+name: apply-terraform-ec2.yaml
+
+on:
+  workflow_dispatch:
+    inputs:
+      instance_name:
+        description: 'EC2 Instance Name'
+        required: true
+      region:
+        description: 'AWS Region for the EC2 instance'
+        required: true
+      instance_type:
+        description: 'EC2 Instance Type'
+        required: true
+      ami_id:
+        description: 'AMI ID to use for the instance'
+        required: true
+      security_group:
+        description: 'Security Group Name for the instance'
+        required: true
+      allowed_ports:
+        description: 'List of allowed inbound ports (comma separated)'
+        required: true
+      enable_public_ip:
+        description: 'Enable Public IP'
+        required: true
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform_apply:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Assume AWS Role using OIDC
+      uses: aws-actions/configure-aws-credentials@v1.7.0
+      with:
+        role-to-assume: arn:aws:iam::730335384723:role/interns_backstage_role
+        role-session-name: GitHub_to_AWS_via_FederatedOIDC
+        aws-region: ${{ github.event.inputs.region }}
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Format
+      run: terraform fmt
+
+    - name: Terraform Validate
+      run: terraform validate
+
+    - name: Terraform Apply
+      run: terraform apply -var instance_name=${{ github.event.inputs.instance_name }} -var region=${{ github.event.inputs.region }} -var instance_type=${{ github.event.inputs.instance_type }} -var ami_id=${{ github.event.inputs.ami_id }} -var security_group=${{ github.event.inputs.security_group }} -var allowed_ports=${{ github.event.inputs.allowed_ports }} -var enable_public_ip=${{ github.event.inputs.enable_public_ip }} -auto-approve
