@@ -55,4 +55,4 @@ jobs:
       run: terraform validate
 
     - name: Terraform Apply
-      run: terraform apply -var instance_name=${{ github.event.inputs.instance_name }} -var region=${{ github.event.inputs.region }} -var instance_type=${{ github.event.inputs.instance_type }} -var ami_id=${{ github.event.inputs.ami_id }} -var security_group=${{ github.event.inputs.security_group }} -var allowed_ports=${{ github.event.inputs.allowed_ports }} -var enable_public_ip=${{ github.event.inputs.enable_public_ip }} -auto-approve
+      run: terraform apply -var instance_name=${{ github.event.inputs.instance_name }} -var region=${{ github.event.inputs.region }} -var instance_type=${{ github.event.inputs.instance_type }} -var security_group=${{ github.event.inputs.security_group }} -var allowed_ports=${{ github.event.inputs.allowed_ports }} -var enable_public_ip=${{ github.event.inputs.enable_public_ip }} -auto-approve
