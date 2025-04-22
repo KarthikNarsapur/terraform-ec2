@@ -1,3 +1,11 @@
+terraform {
+  backend "s3" {
+    bucket = "interns-backstage.io-statefile"
+    key    = "project/terraform.tfstate"
+    region = "ap-south-1"
+  }
+}
+
 resource "aws_security_group" "ec2_sg" {
   name        = var.security_group
   description = "Security group for EC2 instance"
@@ -6,8 +14,8 @@ resource "aws_security_group" "ec2_sg" {
   dynamic "ingress" {
     for_each = var.allowed_ports
     content {
-      from_port   = ingress.value
-      to_port     = ingress.value
+      from_port   = tonumber(ingress.value)
+      to_port     = tonumber(ingress.value)
       protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
     }
