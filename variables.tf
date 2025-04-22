@@ -3,6 +3,13 @@ variable "instance_name" {
   description = "Name of the EC2 instance"
 }
 
+variable "region" {
+  description = "AWS region to deploy resources into"
+  type        = string
+  default     = "ap-south-1"
+}
+
+
 variable "instance_type" {
   type        = string
   description = "Type of EC2 instance"
