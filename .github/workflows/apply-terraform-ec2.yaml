@@ -6,9 +6,6 @@ on:
       instance_name:
         description: 'EC2 Instance Name'
         required: true
-      region:
-        description: 'AWS Region for the EC2 instance'
-        required: true
       instance_type:
         description: 'EC2 Instance Type'
         required: true
