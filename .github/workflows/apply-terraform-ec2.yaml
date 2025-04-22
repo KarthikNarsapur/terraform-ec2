@@ -18,9 +18,6 @@ on:
       enable_public_ip:
         description: 'Enable Public IP'
         required: true
-      region:
-        description: 'AWS region'
-        required: true
 
 permissions:
   id-token: write
