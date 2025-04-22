@@ -29,7 +29,7 @@ resource "aws_security_group" "ec2_sg" {
   }
 
   tags = {
-    Name       = "${var.instance_name}-sg"
+    Name       = var.security_group
     CreatedBy  = "Backstage"
   }
 }
