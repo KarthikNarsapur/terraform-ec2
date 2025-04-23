@@ -1,6 +1,7 @@
 variable "instance_name" {
   type        = string
   description = "Name of the EC2 instance"
+  default = ""
 }
 
 variable "region" {
@@ -13,6 +14,7 @@ variable "region" {
 variable "instance_type" {
   type        = string
   description = "Type of EC2 instance"
+  default = "t2.micro"
 }
 
 variable "ami_id" {
@@ -24,6 +26,7 @@ variable "ami_id" {
 variable "security_group" {
   type        = string
   description = "Security group name"
+  default = ""
 }
 
 variable "allowed_ports" {
