@@ -53,8 +53,4 @@ variable "subnet_id" {
   default     = "subnet-0376b05408a1be5d4"
 }
 
-variable "instanceId" {
-  type        = string
-  description = "instance id to destroy"
-  
-}
+
