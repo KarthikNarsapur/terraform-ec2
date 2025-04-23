@@ -29,6 +29,7 @@ variable "security_group" {
 variable "allowed_ports" {
   type        = list(number)
   description = "List of allowed inbound ports"
+  default = []
 }
 
 variable "enable_public_ip" {
