@@ -48,6 +48,4 @@ resource "aws_instance" "ec2_instance" {
   }
 }
 
-resoure "aws_instance" "destroy_instance"{
-  instanceId                  = var.instanceId
-}
+
