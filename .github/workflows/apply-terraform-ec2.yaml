@@ -6,11 +6,6 @@ on:
 
     inputs:
 
-      action:
-
-        description: 'Creation or termination'
-
-        required: true
 
       instance_name:
 
