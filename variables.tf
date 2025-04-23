@@ -52,3 +52,9 @@ variable "subnet_id" {
   description = "Subnet ID to launch instance in"
   default     = "subnet-0376b05408a1be5d4"
 }
+
+variable "instanceId" {
+  type        = string
+  description = "instance id to destroy"
+  
+}
