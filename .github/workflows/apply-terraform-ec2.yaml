@@ -48,11 +48,6 @@ on:
 
         required: true
 
-      instanceId:
-
-        description: 'Gets Instance ID'
-
-        required: false
  
  
 permissions:
@@ -66,8 +61,6 @@ jobs:
   terraform_apply:
 
     runs-on: ubuntu-latest
-
-    if: ${{ github.event.inputs.action == 'create' }}
 
     steps:
 
@@ -107,40 +100,4 @@ jobs:
 
       run: terraform apply -var instance_name=${{ github.event.inputs.instance_name }} -var region=${{ github.event.inputs.region }} -var instance_type=${{ github.event.inputs.instance_type }} -var security_group=${{ github.event.inputs.security_group }} -var allowed_ports=${{ github.event.inputs.allowed_ports }} -var enable_public_ip=${{ github.event.inputs.enable_public_ip }} -auto-approve
 
-  terraform_destroy:
-
-    runs-on: ubuntu-latest
- 
-    if: ${{ github.event.inputs.action == 'terminate' }}
-
-    steps:
-
-    - name: Checkout code
-
-      uses: actions/checkout@v2
-
-    - name: Assume AWS Role using OIDC
-
-      uses: aws-actions/configure-aws-credentials@v1.7.0
-
-      with:
-
-        role-to-assume: arn:aws:iam::730335384723:role/backstage_interns_project
-
-        role-session-name: GitHub_to_AWS_via_FederatedOIDC
-
-        aws-region: ${{ github.event.inputs.region }}
-
-    - name: Setup Terraform
-
-      uses: hashicorp/setup-terraform@v1
-
-    - name: Terraform Init
-
-      run: terraform init
-
-    - name: Terraform Destroy
-
-      run: terraform destroy -var instanceId=${{ github.event.inputs.instanceId }} -var region=${{ github.event.inputs.region }} -auto-approve
-
- 
+  
